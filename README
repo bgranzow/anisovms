@@ -1,0 +1,5 @@
+# AnisoVMS
+> Playing around with Omega_h to learn about it
+
+## Building
+cmake -DCMAKE_CXX_COMPILER=mpicxx -DOmega_h_PREFIX=<path-to-omega_h-install>
