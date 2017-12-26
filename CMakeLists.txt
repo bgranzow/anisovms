@@ -4,14 +4,24 @@ project(AnisoVMS VERSION 1.0.0 LANGUAGES CXX)
 
 include(bob.cmake)
 bob_begin_package()
+bob_begin_cxx_flags()
+bob_cxx11_flags()
+bob_end_cxx_flags()
 
-set(AnisoVMS_USE_Omega_h_DEFAULT ON)
-bob_public_dep(Omega_h)
+set(AnisoVMS_USE_SCOREC_DEFAULT ON)
+bob_public_dep(SCOREC)
 
-set(CMAKE_CXX_FLAGS "${Omega_h_CXX_FLAGS}")
-message("-- CMAKE_CXX_FLAGS: ${CMAKE_CXX_FLAGS}")
+set(SOURCES
+disc.cpp)
+
+set(HEADERS
+disc.hpp)
+
+add_library(AnisoVMS ${SOURCES} ${HEADERS})
+target_include_directories(AnisoVMS PUBLIC ${PETSC_INCLUDE_DIR})
+target_link_libraries(AnisoVMS PUBLIC SCOREC::core ${PETSC_LIBRARY})
 
 add_executable(ex1 ex1.cpp)
-target_link_libraries(ex1 PUBLIC Omega_h::omega_h)
+target_link_libraries(ex1 PUBLIC AnisoVMS)
 
 bob_end_package()

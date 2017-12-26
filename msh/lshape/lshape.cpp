@@ -17,4 +17,5 @@ int main() {
     vec(.5,.5,0) };
   auto f = new_polygon(pts);
   write_closure_to_geo(f, "lshape.geo");
+  write_closure_to_dmg(f, "lshape.dmg");
 }
