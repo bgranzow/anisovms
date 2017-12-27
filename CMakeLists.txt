@@ -12,10 +12,12 @@ set(AnisoVMS_USE_SCOREC_DEFAULT ON)
 bob_public_dep(SCOREC)
 
 set(SOURCES
-disc.cpp)
+disc.cpp
+lhs.cpp)
 
 set(HEADERS
-disc.hpp)
+disc.hpp
+lhs.hpp)
 
 add_library(AnisoVMS ${SOURCES} ${HEADERS})
 target_include_directories(AnisoVMS PUBLIC ${PETSC_INCLUDE_DIR})
