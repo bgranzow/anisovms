@@ -2,6 +2,7 @@
 #include <apfMesh2.h>
 #include <apfShape.h>
 #include "lhs.hpp"
+#include "tau.hpp"
 
 namespace avms {
 
@@ -39,9 +40,9 @@ void LHS::atPoint(Vector const& p, double w, double dv) {
   for (int d = 0; d < dim; ++d)
     Ke(i,j) += (k*GBF[j][d]*GBF[i][d] + a[d]*GBF[j][d]*BF[i])*w*dv;
 
-//  auto tau = get_tau(mesh, elem, k, a);
-  auto tau = 0.0;
-  
+  auto ent = apf::getMeshEntity(elem);
+  auto tau = get_tau(mesh, ent, k, a);
+
   for (int i = 0; i < nodes; ++i) {
     for (int j = 0; j < nodes; ++j) {
       double adv1 = 0.0;

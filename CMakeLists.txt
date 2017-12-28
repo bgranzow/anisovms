@@ -14,12 +14,18 @@ bob_public_dep(SCOREC)
 set(SOURCES
 disc.cpp
 lhs.cpp
-rhs.cpp)
+rhs.cpp
+tau.cpp
+sys.cpp
+primal.cpp)
 
 set(HEADERS
 disc.hpp
 lhs.hpp
-rhs.cpp)
+rhs.cpp
+tau.hpp
+sys.hpp
+primal.hpp)
 
 add_library(AnisoVMS ${SOURCES} ${HEADERS})
 target_include_directories(AnisoVMS PUBLIC ${PETSC_INCLUDE_DIR})

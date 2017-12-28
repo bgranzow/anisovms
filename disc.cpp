@@ -18,6 +18,8 @@ Disc::Disc(
   dim = mesh->getDimension();
   nmbr = 0;
   outfile = ofile;
+  u = apf::createFieldOn(mesh, "u", apf::SCALAR);
+  z = apf::createFieldOn(mesh, "z", apf::SCALAR);
   update();
 }
 

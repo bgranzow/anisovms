@@ -26,6 +26,8 @@ struct Disc {
   int nodes;
   apf::Mesh2* mesh;
   apf::Numbering* nmbr;
+  apf::Field* u;
+  apf::Field* z;
   std::string outfile;
 };
 
