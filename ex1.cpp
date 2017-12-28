@@ -28,6 +28,7 @@ static void run(int argc, char** argv) {
   for (int i = 0; i < adapt_iters; ++i) {
     avms::solve(&disc, k, a, f, false);
     avms::solve(&disc, k, a, q, true);
+    disc.write(at++);
     avms::adapt(&lib, &disc, afile);
     disc.update();
     disc.write(at++);
