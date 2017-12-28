@@ -3,7 +3,11 @@ Omega_h:
   Max Length Allowed: 2.8
   Metric:
     Sources:
-      Only Source:
+      Source 1:
+        Type: Variation
+        Tag Name: z
+        Knob: 0.25e-02
+      Source 2:
         Type: Variation
         Tag Name: u
         Knob: 0.25e-02
