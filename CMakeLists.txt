@@ -17,7 +17,8 @@ lhs.cpp
 rhs.cpp
 tau.cpp
 sys.cpp
-primal.cpp)
+solver.cpp
+adapt.cpp)
 
 set(HEADERS
 disc.hpp
@@ -25,7 +26,8 @@ lhs.hpp
 rhs.cpp
 tau.hpp
 sys.hpp
-primal.hpp)
+solver.hpp
+adapt.hpp)
 
 add_library(AnisoVMS ${SOURCES} ${HEADERS})
 target_include_directories(AnisoVMS PUBLIC ${PETSC_INCLUDE_DIR})

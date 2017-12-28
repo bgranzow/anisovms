@@ -4,7 +4,7 @@
 
 namespace avms {
 
-static double get_mesh_size(apf::Mesh2* m, apf::MeshEntity* e) {
+double get_mesh_size(apf::Mesh2* m, apf::MeshEntity* e) {
   double h = 0.0;
   apf::Downward edges;
   int ne = m->getDownward(e, 1, edges);

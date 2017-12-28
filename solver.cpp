@@ -5,7 +5,7 @@
 #include "sys.hpp"
 #include "lhs.hpp"
 #include "rhs.hpp"
-#include "primal.hpp"
+#include "solver.hpp"
 
 namespace avms {
 
@@ -26,9 +26,10 @@ static void assemble_volumetric(
     double k,
     Vector const& a,
     std::function<double(Vector const& x)> f,
+    bool is_dual,
     Sys* sys) {
   auto m = disc->mesh;
-  LHS lhs(m, k, a, false);
+  LHS lhs(m, k, a, is_dual);
   RHS rhs(m, k, a, f);
   apf::MeshEntity* elem;
   auto it = m->begin(disc->dim);
@@ -65,17 +66,19 @@ static void assemble_dbcs(Disc* disc, Sys* sys) {
   std::cout << "homongenous dbcs applied to " << nbdry << " boundaries\n";
 }
 
-void solve_primal(
+void solve(
     Disc* disc,
     double k,
     Vector const& a,
-    std::function<double(Vector const& x)> f) {
-  std::cout << "primal solve: " << disc->nodes << " dofs\n";
+    std::function<double(Vector const& x)> f,
+    bool is_dual) {
+  std::string type = is_dual ? "dual" : "primal";
+  std::cout << type << " solve: " << disc->nodes << " dofs\n";
   Sys sys(disc->nodes);
-  assemble_volumetric(disc, k, a, f, &sys);
+  assemble_volumetric(disc, k, a, f, is_dual, &sys);
   assemble_dbcs(disc, &sys);
   sys.solve();
-  sys.attach(disc, false);
+  sys.attach(disc, is_dual);
 }
 
 }

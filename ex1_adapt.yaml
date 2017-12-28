@@ -1,0 +1,19 @@
+Omega_h:
+  Verbosity: Silent
+  Max Length Allowed: 2.8
+  Metric:
+    Sources:
+      Only Source:
+        Type: Variation
+        Tag Name: u
+        Knob: 0.25e-02
+    Limit Lenths: true
+    Max Length: 0.9
+    Limit Gradation: true
+    Max Gradation Rate: 0.5
+  Transfer:
+    Fields:
+      u:
+        Type: Linear Interp
+      z:
+        Type: Linear Interp

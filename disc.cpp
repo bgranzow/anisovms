@@ -3,6 +3,7 @@
 #include <gmi_mesh.h>
 #include <sstream>
 #include <fstream>
+#include <cassert>
 
 namespace avms {
 
@@ -14,6 +15,8 @@ Disc::Disc(
   auto m = mfile.c_str();
   auto g = gfile.c_str();
   mesh = apf::loadMdsMesh(g, m);
+  model = mesh->getModel();
+  apf::disownMdsModel(mesh);
   apf::verify(mesh);
   dim = mesh->getDimension();
   nmbr = 0;
@@ -25,14 +28,35 @@ Disc::Disc(
 
 Disc::~Disc() {
   if (nmbr) apf::destroyNumbering(nmbr);
+  if (mesh) mesh->destroyNative();
+  if (mesh) apf::destroyMesh(mesh);
+  if (model) gmi_destroy(model);
+}
+
+void Disc::clear() {
+  if (nmbr) apf::destroyNumbering(nmbr);
+  if (u) apf::destroyField(u);
+  if (z) apf::destroyField(z);
   mesh->destroyNative();
   apf::destroyMesh(mesh);
+  mesh = 0;
+  nmbr = 0;
+  u = 0;
+  z = 0;
 }
 
 void Disc::update() {
   if (nmbr) apf::destroyNumbering(nmbr);
   nmbr = apf::numberOwnedNodes(mesh, "n");
   nodes = apf::countNodes(nmbr);
+  u = mesh->findField("u");
+  z = mesh->findField("z");
+  assert(u);
+  assert(z);
+  auto s = mesh->findField("size");
+  auto q = mesh->findField("quality");
+  if (s) apf::destroyField(s);
+  if (q) apf::destroyField(q);
 }
 
 void Disc::write(int i) {
