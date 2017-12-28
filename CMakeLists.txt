@@ -18,6 +18,7 @@ rhs.cpp
 tau.cpp
 sys.cpp
 solver.cpp
+error.cpp
 adapt.cpp)
 
 set(HEADERS
@@ -27,6 +28,7 @@ rhs.cpp
 tau.hpp
 sys.hpp
 solver.hpp
+error.hpp
 adapt.hpp)
 
 add_library(AnisoVMS ${SOURCES} ${HEADERS})
